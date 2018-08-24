@@ -1,0 +1,85 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+{%block head%}
+<link rel="stylesheet" type="text/css" href={% static "mainapp/css/jquery.dataTables.min.css"%}>
+{%endblock%}
+
+{%block menu_recepient_active%}class="active"{%endblock%}
+
+{%block navimenu%}
+<li><a href="">Владельцы</a></li>
+<li class="active">Все вдадельцы</li>
+{{user.get_short_name}}
+{%endblock%}
+
+{%block header%}
+<h2 style="margin-left: 20px;">Владельцы</h2>
+{%endblock%}
+
+{%block body%}
+<div class = "col-md-12">
+    <table id="example" class="table table-hover" style="width:100;">
+            <thead>
+                <tr>
+                    <th>-</th>
+                    <th >ФИО</th>
+                    <th class="text-center">СНИЛС</th>
+                    <th class="text-center">ИНН</th>
+                </tr>
+            </thead>
+            <tbody>
+                  {% for persone in persones_list %}
+
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{{ persone.pk }}">{{ persone.fullname }} </a></td>
+                    <td class="text-center">{{ persone.snils }}</td>
+                    <td class="text-center">{{ persone.inn }} </td>
+                  </tr>
+
+
+                  {% endfor %}
+
+            </tbody>
+        </table>
+</div>
+
+
+{%endblock%}
+
+{%block scripts%}
+<script src={% static "mainapp/jquery-3.2.1.min.js" %}></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+<script type="text/javascript" language="javascript" src={% static "mainapp/js/jquery.dataTables.min.js"%} ></script>
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable({
+    language: {
+      processing:     "Traitement en cours...",
+      search:         "Фильтр",
+      lengthMenu:    "Показать _MENU_ элементов",
+      info:           "Показано _START_ из _END_ из _TOTAL_ элементов",
+      infoEmpty:      "Показано 0 из 0 из 0 элементов",
+      infoFiltered:   "(Отфильтровано из _MAX_ позиций)",
+      infoPostFix:    "",
+      loadingRecords: "Chargement en cours...",
+      zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+      emptyTable:     "Нет данных",
+      paginate: {
+            first:      "Первый",
+            previous:   "Предыдущий",
+            next:       "Следующий",
+            last:       "Последний"
+        },
+    }
+});
+} );
+
+</script>
+
+
+{%endblock%}

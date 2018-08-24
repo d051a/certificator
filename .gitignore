@@ -1,0 +1,17 @@
+*.cer
+db.sqlite3
+
+#исключение содержимого папок
+authapp/migrations/*
+authapp/migrations/__pycache__/*
+authapp/__pycache__/*
+mainapp/migrations/*
+mainapp/migrations/__pycache__/*
+mainapp/__pycache__/*
+SERTIFICATOR/__pycache__/*
+mainapp/templatetags/__pycache__/*
+
+#кроме подиректории:
+!authapp/migrations/__init__.py
+!mainapp/migrations/__pycache__
+!mainapp/migrations/__init__.py

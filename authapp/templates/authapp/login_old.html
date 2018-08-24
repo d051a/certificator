@@ -1,0 +1,35 @@
+{% extends 'base_template.html' %}
+{%block navibar%}
+<ul class="nav navbar-nav navbar-right">
+  {% if user.is_authenticated %}
+  <a <button href="{% url 'authapp:logout' %}" type="button" class="btn btn-default navbar-btn">LOGOUT</a>
+  {% else %}
+  <a <button href="{% url 'authapp:login' %}" type="button" class="btn btn-default navbar-btn">LogIn</a>
+  <a href="{% url 'authapp:registration' %}" type="button" class="btn btn-default navbar-btn">Registration</a>
+  {% endif %}
+{%endblock navibar%}
+
+
+{%block menu_recepient_active%}class="active"{%endblock%}
+
+{%block navimenu%}
+<li><a href="">Адресная книга</a></li>
+<li class="active">Все адресаты</li>
+{%endblock%}
+
+{%block header%}
+<h2 style="margin-left: 20px;">Войти</h2>
+{%endblock%}
+
+{%block body%}
+<form action="" method="post">
+  {% csrf_token %}
+  {% for field in form%}
+  <label for="">{{ field.label }}</label>
+  <div>{{ field }}</div>
+  <p>{{ field.errors }}</p>
+  {% endfor %}
+<button type="submit">Войти</button>
+</form>
+
+{%endblock%}
